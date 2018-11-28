@@ -44,8 +44,18 @@ function draw() {
   noStroke();
   fill(0, 0, 0, 30)
   rect(width / 2, 0, width / 2, height);
-  imageMode(CENTER);
-  image(myImage, width / 2, height / 2, myImage.width + volume / 2, myImage.height + volume / 2);
+  if (mySong.isPlaying()) {
+    push();
+    translate(width / 2, height / 2);
+    rotate(frameCount / 180);
+    imageMode(CENTER);
+    image(myImage, 0, 0, myImage.width + volume / 2, myImage.height + volume / 2);
+    pop();
+  } else {
+    imageMode(CENTER);
+    image(myImage, width / 2, height / 2, myImage.width + volume / 2, myImage.height + volume / 2);
+  }
+
 
   push();
   fill('white');
