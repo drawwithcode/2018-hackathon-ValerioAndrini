@@ -3,10 +3,9 @@ var analyzer;
 var myImage;
 var lightning;
 var lightning2;
-
+var rot;
 
 function preload() {
-  // put preload code here
   mySong = loadSound("./assets/the_flash_theme.mp3");
   myImage = loadImage("./assets/flash.png");
   lightning = loadImage("./assets/effect.png");
@@ -14,7 +13,6 @@ function preload() {
 }
 
 function setup() {
-  // put setup code here
   createCanvas(windowWidth, windowHeight);
 
   analyzer = new p5.Amplitude();
@@ -22,7 +20,6 @@ function setup() {
 }
 
 function draw() {
-  // put drawing code here
   background(225, 71, 73);
 
   var volume = 0;
@@ -44,18 +41,23 @@ function draw() {
   noStroke();
   fill(0, 0, 0, 30)
   rect(width / 2, 0, width / 2, height);
+
   if (mySong.isPlaying()) {
     push();
     translate(width / 2, height / 2);
     rotate(frameCount / 180);
+    rot = frameCount / 180;
     imageMode(CENTER);
     image(myImage, 0, 0, myImage.width + volume / 2, myImage.height + volume / 2);
     pop();
   } else {
+    push();
+    translate(width / 2, height / 2);
+    rotate(rot);
     imageMode(CENTER);
-    image(myImage, width / 2, height / 2, myImage.width + volume / 2, myImage.height + volume / 2);
+    image(myImage, 0, 0, myImage.width + volume / 2, myImage.height + volume / 2);
+    pop();
   }
-
 
   push();
   fill('white');
